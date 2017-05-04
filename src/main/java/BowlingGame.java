@@ -1,11 +1,12 @@
-package main.java;
+ï»¿package main.java;
 public class BowlingGame {
     public int getBowlingScore(String bowlingCode) {
 	    String[] first=bowlingCode.split("\\|\\|");
-        String[] second = first[0].split("\\|"); //String[] aa = "aaa|bbb|ccc".split("\\|"); ÕâÑù²ÅÄÜµÃµ½ÕıÈ·µÄ½á¹û
+        String[] aa = first[0].split("\\|"); 
+		//String[] aa = "aaa|bbb|ccc".split("\\|"); è¿™æ ·æ‰èƒ½å¾—åˆ°æ­£ç¡®çš„ç»“æœ
 		int[][] scores = new int[11][4];
-        scores=parseInputString(first,second);
-        /*½âÎöÊäÈëµÄ×Ö·û´®²¢´æÈë¶şÎ¬Êı×éÀï----end**/
+        scores=parseInputString(first, aa);
+        /*è§£æè¾“å…¥çš„å­—ç¬¦ä¸²å¹¶å­˜å…¥äºŒç»´æ•°ç»„é‡Œ----end**/
         int result=getScore(scores);
         System.out.println(result + "\t");
 		return result;
@@ -14,21 +15,21 @@ public class BowlingGame {
 	 public static int getScore(int[][] scores){
         int res=0;
         for (int i = 0; i < scores.length-1; i++) {
-		          //Ç°11ÂÖ
+		          //å‰11è½®
             if (scores[i][0] == 10 && i != 9) {
                 if (scores[i + 1][0] == 10 && i < 8){ 
-				     //Ç°8ÂÖ£¬Ò»´Î10·Ö ¾Í¼ÇºóÃæ2Í¶ÇòµÄ·ÖÊı
+				     //å‰8è½®ï¼Œä¸€æ¬¡10åˆ† å°±è®°åé¢2æŠ•çƒçš„åˆ†æ•°
                     scores[i][2] = scores[i][0] + scores[i + 1][0]  + scores[i + 2][0];
                 }else if (scores[i + 1][0] != 10 || i == 8){
-				        //µÚ9ÂÖ10·Ö ¼ÇµÚ10ÂÖ2´ÎµÄ·ÖÊı
+				        //ç¬¬9è½®10åˆ† è®°ç¬¬10è½®2æ¬¡çš„åˆ†æ•°
                     scores[i][2] = scores[i][0]  + scores[i + 1][0]  + scores[i + 1][1];
                 }
             }else{              
                 if (scores[i][0] + scores[i][1] == 10 && i < 9){
-				       //Ç°9ÂÖ ²¹ÖĞ10·Ö ¼ÓÉÏÏÂÂÖµÚÒ»´ÎµÄ·ÖÊı
+				       //å‰9è½® è¡¥ä¸­10åˆ† åŠ ä¸Šä¸‹è½®ç¬¬ä¸€æ¬¡çš„åˆ†æ•°
                     scores[i][2] = scores[i][0] + scores[i][1] + scores[i + 1][0];
                 }else{
-				         //2´Î²»×ã10·Ö ¾Í¼ÇÕâÃ´¶à
+				         //2æ¬¡ä¸è¶³10åˆ† å°±è®°è¿™ä¹ˆå¤š
                     scores[i][2] = scores[i][0] + scores[i][1];
                 }
             }
@@ -70,35 +71,35 @@ public class BowlingGame {
                     continue;
                 }                 
         }
-    //½âÎö|| Ö®ºóµÄ×Ö·û±íÊ¾×îºóÒ»¸ñµÄ¶îÍâ»ú»á
+    //è§£æ|| ä¹‹åçš„å­—ç¬¦è¡¨ç¤ºæœ€åä¸€æ ¼çš„é¢å¤–æœºä¼š
             if(first.length>=2){
                     if(first[1].length()==1){
-                      //ÀıÈç||ºóÃæÎªX
+                      //ä¾‹å¦‚||åé¢ä¸ºX
                        if(first[1].equals("X")==true){
                            scores[10][0] =10;
                            scores[10][2] =10;
                         }
-                     //ÀıÈç||ºóÃæÎª5
+                     //ä¾‹å¦‚||åé¢ä¸º5
                        if(Integer.valueOf(first[1])<=10){
                            scores[10][0] =Integer.valueOf(first[1]);
                            scores[10][2] =Integer.valueOf(first[1]);
                        }                
                     }
                     else  if(first[1].length()==2){   
-                     //ÀıÈç||ºóÃæÎªXX
+                     //ä¾‹å¦‚||åé¢ä¸ºXX
                      if(first[1].equals("XX")){ 
                          scores[9][1]=10;
                          scores[10][0]=10;
                          scores[10][2]=10;
                      }
                      if(first[1].equals("XX")!=true  && first[1].indexOf("X")!=-1){
-                         //ÀıÈç||ºóÃæX5
+                         //ä¾‹å¦‚||åé¢X5
                          if(first[1].indexOf("X")==0){
                              scores[9][1]=10;
                              scores[10][0]=Integer.parseInt(first[1].substring(1,first[1].length()));
                              scores[10][2]=scores[10][0];
                          }
-                         //ÀıÈç||ºóÃæÎª5X
+                         //ä¾‹å¦‚||åé¢ä¸º5X
                          else if(first[1].indexOf("X")>=1){
                              scores[9][1]=Integer.parseInt(first[1].substring(0,first[1].indexOf("X")));
                              scores[10][0]=10;
@@ -106,7 +107,7 @@ public class BowlingGame {
                          }
                         
                         } 
-                     //ÀıÈç||ºóÃæÎª81
+                     //ä¾‹å¦‚||åé¢ä¸º81
                       if(first[1].equals("XX")!=true  &&first[1].indexOf("X")==-1 && Integer.valueOf(first[1])>=10){
                         scores[9][1]=Integer.parseInt(first[1].substring(0,1));
                         scores[10][0]=Integer.parseInt(first[1].substring(1,2));
